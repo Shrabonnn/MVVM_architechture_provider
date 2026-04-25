@@ -6,6 +6,7 @@ import 'package:mvvm/data/app_exceptions.dart';
 import 'package:mvvm/data/network/base_api_services.dart';
 
 class NetworkApiServices extends BaseApiServices {
+  @override
   Future<dynamic> getGetApiResponse(String url) async {
     dynamic resonponseJson;
 
@@ -22,7 +23,8 @@ class NetworkApiServices extends BaseApiServices {
     return resonponseJson;
   }
 
-  Future<void> getPostApiResponse(String url, Map<String, String> headers, dynamic data,) async {
+  @override
+  Future<void> getPostApiResponse(String url, dynamic data) async {
     dynamic resonponseJson;
 
     try {

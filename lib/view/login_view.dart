@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mvvm/res/components/round_button.dart';
 import 'package:mvvm/utils/routes/routes_name.dart';
 import 'package:mvvm/utils/utils.dart';
+import 'package:mvvm/view_model/auth_view_model.dart';
+import 'package:provider/provider.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -35,6 +37,9 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
+
+    final authViewModel = Provider.of<AuthViewModel>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Login"),
@@ -99,7 +104,15 @@ class _LoginViewState extends State<LoginView> {
                 }
                 else if(passwordController.text.length <= 6){
                   Utils.flushbarErrorMessage('Password should be at-least 6 character', context);
-                }
+                }else{
+                   Map data= {
+                     "username": "emilys",
+                     "email": emailController.text.toString(),
+                     "password": passwordController.text.toString(),
+                     };
+                   authViewModel.loginApi(data , context);
+                   print('Hit api');
+                 }
               })
 
           ],
